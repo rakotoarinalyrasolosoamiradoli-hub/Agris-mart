@@ -131,10 +131,16 @@ class LoginFrame(tk.Frame):
         chemin = os.path.join(base_dir, "téléchargement.jpg")
         if os.path.exists(chemin):
             try:
-                from PIL import Image, ImageTk
+                from PIL import Image, ImageTk, ImageDraw
                 img = Image.open(chemin).convert("RGBA")
                 img = img.resize((130, 130), Image.LANCZOS)
-                self.logo_agrismart = ImageTk.PhotoImage(img)
+                masque = Image.new("L",(50,50), 0)
+                draw = ImageDraw.Draw(masque)
+                rayon = 15
+                draw.rounded_rectangle((0,0,49,49), radius=rayon, fill=255)
+                resultat = Image.new("RGBA", (50, 50), (0, 0, 0, 0))
+                resultat.paste(img, mask=masque)
+                self.logo_agrismart = ImageTk.PhotoImage(resultat)
                 print("[Logo AgriSmart] OK")
             except ImportError:
                 print("[Logo AgriSmart] Pillow absent → pip install Pillow")
