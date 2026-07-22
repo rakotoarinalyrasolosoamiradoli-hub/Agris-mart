@@ -20,7 +20,7 @@ class Application(tk.Tk):
 
         # Configuration de la fenêtre
         self.title("AgriSmart — Gestion de cultures")
-        self.geometry("1000x650")
+        self.geometry("1920x1080")
         self.minsize(800, 500)
         self.configure(bg=COULEUR_FOND)
 
